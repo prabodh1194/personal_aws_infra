@@ -13,7 +13,7 @@ data "aws_ami" "ray_general_purpose_machine" {
 
     filter {
         name   = "name"
-        values = ["amzn2-ami-kernel-*"]
+        values = ["ubuntu/images/hvm-ssd/ubuntu*"]
     }
 }
 
