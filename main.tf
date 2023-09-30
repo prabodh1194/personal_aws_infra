@@ -12,3 +12,7 @@ terraform {
 provider "aws" {
     region = "us-east-1"
 }
+
+module "ray_geenral_purpose_compute" {
+    source = "./ray_general_purpose_compute"
+}
