@@ -19,12 +19,14 @@ data "aws_ami" "ray_general_purpose_machine" {
 
 resource "aws_instance" "ray_general_purpose_machine" {
     ami           = data.aws_ami.ray_general_purpose_machine.id
-    instance_type = "t4g.small"
+    instance_type = "r7gd.2xlarge"
 
     instance_market_options {
         market_type = "spot"
         spot_options {
+            spot_instance_type = "persistent"
             max_price = "0.5"
+            instance_interruption_behavior = "stop"
         }
     }
 
