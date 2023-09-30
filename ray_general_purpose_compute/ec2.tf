@@ -28,6 +28,10 @@ resource "aws_instance" "ray_general_purpose_machine" {
         }
     }
 
+    security_groups = [
+        aws_security_group.ssh_sg.name
+    ]
+
     tags = {
         Name = "ray_general_purpose_machine"
     }
