@@ -10,13 +10,19 @@ data "aws_ami" "ray_general_purpose_machine" {
         name   = "architecture"
         values = ["arm64"]
     }
+
+    filter {
+        name   = "name"
+        values = ["amzn2-ami-kernel-*"]
+    }
 }
 
 resource "aws_instance" "ray_general_purpose_machine" {
-    ami           = "data.aws_ami.ray_general_purpose_machine.id"
+    ami           = data.aws_ami.ray_general_purpose_machine.id
     instance_type = "r7gd.xlarge"
 
     instance_market_options {
+        market_type = "spot"
         spot_options {
             max_price = "0.5"
         }
