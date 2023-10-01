@@ -15,4 +15,6 @@ provider "aws" {
 
 module "ray_general_purpose_compute" {
     source = "./ray_general_purpose_compute"
+    architecture = var.architecture
+    instance_type = var.instance_type
 }

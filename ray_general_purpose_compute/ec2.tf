@@ -8,7 +8,7 @@ data "aws_ami" "ray_general_purpose_machine" {
 
     filter {
         name   = "architecture"
-        values = ["x86_64"]
+        values = [var.architecture]
     }
 
     filter {
@@ -19,7 +19,7 @@ data "aws_ami" "ray_general_purpose_machine" {
 
 resource "aws_instance" "ray_general_purpose_machine" {
     ami           = data.aws_ami.ray_general_purpose_machine.id
-    instance_type = "g5.4xlarge"
+    instance_type = var.instance_type
 
 
     security_groups = [
