@@ -8,7 +8,7 @@ data "aws_ami" "ray_general_purpose_machine" {
 
     filter {
         name   = "architecture"
-        values = ["arm64"]
+        values = ["x86_64"]
     }
 
     filter {
@@ -19,16 +19,8 @@ data "aws_ami" "ray_general_purpose_machine" {
 
 resource "aws_instance" "ray_general_purpose_machine" {
     ami           = data.aws_ami.ray_general_purpose_machine.id
-    instance_type = "r7gd.2xlarge"
+    instance_type = "g5.4xlarge"
 
-    instance_market_options {
-        market_type = "spot"
-        spot_options {
-            spot_instance_type = "persistent"
-            max_price = "0.5"
-            instance_interruption_behavior = "stop"
-        }
-    }
 
     security_groups = [
         aws_security_group.ssh_sg.name
