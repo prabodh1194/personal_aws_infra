@@ -20,7 +20,9 @@ data "aws_ami" "ray_general_purpose_machine" {
 resource "aws_instance" "ray_general_purpose_machine" {
     ami           = data.aws_ami.ray_general_purpose_machine.id
     instance_type = var.instance_type
+    user_data_replace_on_change = true
 
+    user_data = "$(file(setup_ray.sh))"
 
     security_groups = [
         aws_security_group.ssh_sg.name
