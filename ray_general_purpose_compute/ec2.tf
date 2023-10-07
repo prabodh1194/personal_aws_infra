@@ -1,24 +1,5 @@
-data "aws_ami" "ray_general_purpose_machine" {
-    most_recent = true
-    owners      = ["amazon"]
-    filter {
-        name   = "virtualization-type"
-        values = ["hvm"]
-    }
-
-    filter {
-        name   = "architecture"
-        values = [var.architecture]
-    }
-
-    filter {
-        name   = "name"
-        values = ["ubuntu/images/hvm-ssd/ubuntu*"]
-    }
-}
-
 resource "aws_instance" "ray_general_purpose_machine" {
-    ami           = data.aws_ami.ray_general_purpose_machine.id
+    ami           = var.architecture == "x86_64" ? "ami-053b0d53c279acc90" : "ami-0a0c8eebcdd6dcbd0"
     instance_type = var.instance_type
     user_data_replace_on_change = true
 
